@@ -19,11 +19,11 @@ public class BookingManagerTest {
     @Test
     public void testEmptyTheatreSingleAllocation() {
 
-        List<Seat> allocateSeats = bookingManager.allocateSeats(1);
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(1);
 
-        assertEquals(1, allocateSeats.size());
+        assertEquals(1, allocatedSeats.size());
 
-        Seat seat1 = allocateSeats.get(0);
+        Seat seat1 = allocatedSeats.get(0);
         checkSeat(seat1, Row.A, SeatNumber.ONE);
 
     }
@@ -31,17 +31,32 @@ public class BookingManagerTest {
     @Test
     public void testEmptyTheatreDoubleAllocation() {
 
-        List<Seat> allocateSeats = bookingManager.allocateSeats(2);
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(2);
 
-        assertEquals(2, allocateSeats.size());
+        assertEquals(2, allocatedSeats.size());
 
-        Seat seat1 = allocateSeats.get(0);
+        Seat seat1 = allocatedSeats.get(0);
         checkSeat(seat1, Row.A, SeatNumber.ONE);
-        Seat seat2 = allocateSeats.get(1);
+        Seat seat2 = allocatedSeats.get(1);
         checkSeat(seat2, Row.A, SeatNumber.TWO);
     }
 
-    private void checkSeat(Seat seat, Row row, SeatNumber seatNumber){
+    @Test
+    public void testEmptyTheatreTripleAllocation() {
+
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(3);
+
+        assertEquals(3, allocatedSeats.size());
+
+        Seat seat1 = allocatedSeats.get(0);
+        checkSeat(seat1, Row.A, SeatNumber.ONE);
+        Seat seat2 = allocatedSeats.get(1);
+        checkSeat(seat2, Row.A, SeatNumber.TWO);
+        Seat seat3 = allocatedSeats.get(2);
+        checkSeat(seat3, Row.A, SeatNumber.THREE);
+    }
+
+    private void checkSeat(Seat seat, Row row, SeatNumber seatNumber) {
         assertEquals(row, seat.getRow());
         assertEquals(seatNumber, seat.getSeatNumber());
     }

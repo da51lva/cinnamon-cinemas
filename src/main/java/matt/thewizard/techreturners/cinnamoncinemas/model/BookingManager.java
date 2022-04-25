@@ -15,6 +15,8 @@ public class BookingManager {
             return List.of(new Seat(Row.A, SeatNumber.ONE));
         else if(numberOfSeats == 2)
             return List.of(new Seat(Row.A, SeatNumber.ONE), new Seat(Row.A, SeatNumber.TWO));
+        else if(numberOfSeats == 3)
+            return List.of(new Seat(Row.A, SeatNumber.ONE), new Seat(Row.A, SeatNumber.TWO),new Seat(Row.A, SeatNumber.THREE));
         else
             return null;
     }
