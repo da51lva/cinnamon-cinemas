@@ -16,17 +16,34 @@ public class BookingManagerTest {
         bookingManager = new BookingManager();
     }
 
-
     @Test
     public void testEmptyTheatreSingleAllocation() {
 
         List<Seat> allocateSeats = bookingManager.allocateSeats(1);
-        Seat seat1 = allocateSeats.get(0);
 
         assertEquals(1, allocateSeats.size());
-        assertEquals(Row.A, seat1.getRow());
-        assertEquals(SeatNumber.ONE, seat1.getSeatNumber());
 
+        Seat seat1 = allocateSeats.get(0);
+        checkSeat(seat1, Row.A, SeatNumber.ONE);
+
+    }
+
+    @Test
+    public void testEmptyTheatreDoubleAllocation() {
+
+        List<Seat> allocateSeats = bookingManager.allocateSeats(2);
+
+        assertEquals(2, allocateSeats.size());
+
+        Seat seat1 = allocateSeats.get(0);
+        checkSeat(seat1, Row.A, SeatNumber.ONE);
+        Seat seat2 = allocateSeats.get(1);
+        checkSeat(seat2, Row.A, SeatNumber.TWO);
+    }
+
+    private void checkSeat(Seat seat, Row row, SeatNumber seatNumber){
+        assertEquals(row, seat.getRow());
+        assertEquals(seatNumber, seat.getSeatNumber());
     }
 
 }

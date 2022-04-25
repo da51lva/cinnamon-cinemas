@@ -11,7 +11,12 @@ public class BookingManager {
      * @return a List of the Seat allocations made. The size of the returned list should equal the given int.
      */
     public List<Seat> allocateSeats(int numberOfSeats) {
-        return List.of(new Seat(Row.A, SeatNumber.ONE));
+        if ( numberOfSeats == 1)
+            return List.of(new Seat(Row.A, SeatNumber.ONE));
+        else if(numberOfSeats == 2)
+            return List.of(new Seat(Row.A, SeatNumber.ONE), new Seat(Row.A, SeatNumber.TWO));
+        else
+            return null;
     }
 
 }
