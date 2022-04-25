@@ -1,8 +1,15 @@
 package matt.thewizard.techreturners.cinnamoncinemas.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingManager {
+
+    MovieTheatre movieTheatre;
+
+    public BookingManager(MovieTheatre movieTheatre) {
+        this.movieTheatre = movieTheatre;
+    }
 
     /**
      * Will allocate seats in the movie seat for a given number of seats.
@@ -11,14 +18,15 @@ public class BookingManager {
      * @return a List of the Seat allocations made. The size of the returned list should equal the given int.
      */
     public List<Seat> allocateSeats(int numberOfSeats) {
-        if ( numberOfSeats == 1)
-            return List.of(new Seat(Row.A, SeatNumber.ONE));
-        else if(numberOfSeats == 2)
-            return List.of(new Seat(Row.A, SeatNumber.ONE), new Seat(Row.A, SeatNumber.TWO));
-        else if(numberOfSeats == 3)
-            return List.of(new Seat(Row.A, SeatNumber.ONE), new Seat(Row.A, SeatNumber.TWO),new Seat(Row.A, SeatNumber.THREE));
-        else
-            return null;
+
+        List<Seat> allocatedSeats = new ArrayList<>();
+
+        for(int i = 0; i < numberOfSeats; i++){
+            Seat seat = movieTheatre.nextSeat();
+            allocatedSeats.add(seat);
+        }
+
+        return allocatedSeats;
     }
 
 }

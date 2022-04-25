@@ -2,6 +2,8 @@ package matt.thewizard.techreturners.cinnamoncinemas.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class BookingManagerTest {
 
     @BeforeEach
     public void setUp() {
-        bookingManager = new BookingManager();
+        bookingManager = new BookingManager(new MovieTheatre());
     }
 
     @Test
@@ -56,9 +58,28 @@ public class BookingManagerTest {
         checkSeat(seat3, Row.A, SeatNumber.THREE);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/second-allocation-within-first-row.csv", numLinesToSkip = 1)
+    public void testSecondAllocationOfSeatsWithinFirstRow(int firstAllocation, int secondAllocation, String expectedSeatNumberList){
+        bookingManager.allocateSeats(firstAllocation);
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(secondAllocation);
+
+        assertEquals(secondAllocation,allocatedSeats.size());
+
+        String[] expectedSeatNumbers = expectedSeatNumberList.split(" ");
+        for(int i = 0; i < allocatedSeats.size(); i++){
+            checkSeat(allocatedSeats.get(i),"A",expectedSeatNumbers[i]);
+        }
+    }
+
     private void checkSeat(Seat seat, Row row, SeatNumber seatNumber) {
         assertEquals(row, seat.getRow());
         assertEquals(seatNumber, seat.getSeatNumber());
+    }
+
+    private void checkSeat(Seat seat, String row, String seatNumber) {
+        assertEquals(row, seat.getRow().toString());
+        assertEquals(seatNumber, seat.getSeatNumber().getStringRepresentation());
     }
 
 }
