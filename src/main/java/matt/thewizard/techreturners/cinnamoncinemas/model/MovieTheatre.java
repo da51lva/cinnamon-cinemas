@@ -8,6 +8,9 @@ public class MovieTheatre {
 
     private Seat currentSeat = null;
 
+    /**
+     * @return the next free seat in the MovieTheatre
+     */
     public Seat nextSeat() {
         if (currentSeat == null)
             currentSeat = new Seat(FIRST_ROW, FIRST_SEAT_NUMBER);
@@ -17,12 +20,15 @@ public class MovieTheatre {
         return currentSeat;
     }
 
-    private Seat incrementSeat(Seat lastSeat) {
-        Row row = lastSeat.getRow();
-        if (lastSeat.seatNumber == LAST_SEAT_NUMBER)
+    /**
+     * Given a Seat, returns the next seat
+     */
+    private Seat incrementSeat(Seat seat) {
+        Row row = seat.getRow();
+        if (seat.seatNumber == LAST_SEAT_NUMBER)
             row = row.next();
 
-        return new Seat(row, lastSeat.seatNumber.next());
+        return new Seat(row, seat.seatNumber.next());
     }
 
 
