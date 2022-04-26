@@ -72,6 +72,26 @@ public class BookingManagerTest {
         }
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/first-row-wrap.csv", numLinesToSkip = 1)
+    public void testFirstRowWrap(String firstAllocationsList, int wrappingAllocation, String expectedSeatAllocationList){
+
+        //make first seat allocations
+        String[] firstAllocations = firstAllocationsList.split(" ");
+        for(String allocation : firstAllocations)
+            bookingManager.allocateSeats(Integer.valueOf(allocation));
+
+        //make the last allocation which should wrap to the second row
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(wrappingAllocation);
+
+        assertEquals(wrappingAllocation, allocatedSeats.size());
+
+        String[] expectedSeatAllocations = expectedSeatAllocationList.split(" ");
+        for(int i = 0; i < allocatedSeats.size(); i++)
+            checkSeat(allocatedSeats.get(i), expectedSeatAllocations[i].substring(0,1), expectedSeatAllocations[i].substring(1)); //expectedSeatAllocations have the format "A1"
+
+    }
+
     private void checkSeat(Seat seat, Row row, SeatNumber seatNumber) {
         assertEquals(row, seat.getRow());
         assertEquals(seatNumber, seat.getSeatNumber());

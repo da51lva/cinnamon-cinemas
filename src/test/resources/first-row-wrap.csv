@@ -1,0 +1,7 @@
+First Seat Allocations, Wrapping Seat Allocation, Expected Seat Allocations
+3,3,A4 A5 B1
+1 2,3,A4 A5 B1
+2 2,2,A5 B1
+2 2,3,A5 B1 B2
+3 2,1,B1
+2 3,3,B1 B2 B3
