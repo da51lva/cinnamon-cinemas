@@ -19,6 +19,6 @@ public enum SeatNumber {
     }
 
     public SeatNumber next() {
-        return values()[(this.ordinal() + 1) % 5];
+        return values()[(this.ordinal() + 1) % 5]; //wraps from 5 to 1
     }
 }

@@ -5,7 +5,7 @@ public enum Row {
     B,
     C{
         @Override
-        public Row next() {
+        public Row next() { //The last row
             return this;
         }
 
