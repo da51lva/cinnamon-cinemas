@@ -4,11 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BookingManagerTest {
 
@@ -103,7 +103,7 @@ public class BookingManagerTest {
     private void makeMultipleAllocations(String allocationsList) {
         String[] firstAllocations = allocationsList.split(" ");
         for (String allocation : firstAllocations)
-            bookingManager.allocateSeats(Integer.valueOf(allocation));
+            bookingManager.allocateSeats(Integer.parseInt(allocation));
     }
 
     /**
@@ -124,6 +124,12 @@ public class BookingManagerTest {
                     expectedSeatAllocations[i].substring(0, 1), //expectedSeatAllocations have the format "A1"
                     expectedSeatAllocations[i].substring(1)
             );
+    }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = "-10,-1,0,4,10,100")
+    public void checkIllegalAllocation(int allocation){
+        assertThrows(IllegalArgumentException.class, () -> bookingManager.allocateSeats(allocation));
     }
 
     private void checkSeat(Seat seat, Row expectedRow, SeatNumber expectedSeatNumber) {

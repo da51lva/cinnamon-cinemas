@@ -2,11 +2,10 @@ package matt.thewizard.techreturners.cinnamoncinemas.model;
 
 public class MovieTheatre {
 
+    private static final int CAPACITY = Row.values().length * SeatNumber.values().length;
     private static final Row FIRST_ROW = Row.A;
     private static final SeatNumber FIRST_SEAT_NUMBER = SeatNumber.ONE;
     private static final SeatNumber LAST_SEAT_NUMBER = SeatNumber.FIVE;
-
-    private static final int CAPACITY = Row.values().length * SeatNumber.values().length;
 
     private int allocatedSeats = 0;
     private Seat currentSeat = null;
@@ -26,7 +25,9 @@ public class MovieTheatre {
         return currentSeat;
     }
 
-
+    /**
+     * Returns whether the theatre has space to allocate the given number of seats
+     */
     public boolean hasSpace(int noOfSeats) {
         return CAPACITY - allocatedSeats >= noOfSeats;
     }
