@@ -117,14 +117,14 @@ public class BookingManagerTest {
             );
     }
 
-    private void checkSeat(Seat seat, Row row, SeatNumber seatNumber) {
-        assertEquals(row, seat.getRow());
-        assertEquals(seatNumber, seat.getSeatNumber());
+    private void checkSeat(Seat seat, Row expectedRow, SeatNumber expectedSeatNumber) {
+        assertEquals(expectedRow, seat.getRow());
+        assertEquals(expectedSeatNumber, seat.getSeatNumber());
     }
 
-    private void checkSeat(Seat seat, String row, String seatNumber) {
-        assertEquals(row, seat.getRow().toString());
-        assertEquals(seatNumber, seat.getSeatNumber().getStringRepresentation());
+    private void checkSeat(Seat seat, String expectedRow, String expectedSeatNumber) {
+        assertEquals(expectedRow, seat.getRow().toString());
+        assertEquals(expectedSeatNumber, seat.getSeatNumber().getStringRepresentation());
     }
 
 }
