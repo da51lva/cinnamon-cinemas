@@ -21,9 +21,11 @@ public class BookingManager {
 
         List<Seat> allocatedSeats = new ArrayList<>();
 
-        for(int i = 0; i < numberOfSeats; i++){
-            Seat seat = movieTheatre.nextSeat();
-            allocatedSeats.add(seat);
+        if(movieTheatre.hasSpace(numberOfSeats)) {
+            for (int i = 0; i < numberOfSeats; i++) {
+                Seat seat = movieTheatre.nextSeat();
+                allocatedSeats.add(seat);
+            }
         }
 
         return allocatedSeats;

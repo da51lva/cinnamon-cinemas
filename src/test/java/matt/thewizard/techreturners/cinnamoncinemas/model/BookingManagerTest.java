@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookingManagerTest {
 
@@ -84,6 +85,14 @@ public class BookingManagerTest {
     public void testMultipleAllocations(String firstAllocationList, int lastAllocation, String expectedSeatAllocationList) {
         makeMultipleAllocations(firstAllocationList);
         checkAllocation(lastAllocation, expectedSeatAllocationList);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/no-space-for-final-allocation.csv", numLinesToSkip = 1)
+    public void testNoSpaceForFinalAllocation(String firstAllocationsList, int lastAllocation){
+        makeMultipleAllocations(firstAllocationsList);
+        List<Seat> allocatedSeats = bookingManager.allocateSeats(lastAllocation);
+        assertTrue(allocatedSeats.isEmpty());
     }
 
     /**

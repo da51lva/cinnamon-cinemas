@@ -6,19 +6,31 @@ public class MovieTheatre {
     private static final SeatNumber FIRST_SEAT_NUMBER = SeatNumber.ONE;
     private static final SeatNumber LAST_SEAT_NUMBER = SeatNumber.FIVE;
 
+    private static final int CAPACITY = Row.values().length * SeatNumber.values().length;
+
+    private int allocatedSeats = 0;
     private Seat currentSeat = null;
 
     /**
      * @return the next free seat in the MovieTheatre
      */
     public Seat nextSeat() {
-        if (currentSeat == null)
+        if (allocatedSeats == CAPACITY)
+            throw new IllegalArgumentException("The Movie Theatre has no seats left");
+        else if (currentSeat == null)
             currentSeat = new Seat(FIRST_ROW, FIRST_SEAT_NUMBER);
         else
             currentSeat = incrementSeat(currentSeat);
 
+        allocatedSeats++;
         return currentSeat;
     }
+
+
+    public boolean hasSpace(int noOfSeats) {
+        return CAPACITY - allocatedSeats >= noOfSeats;
+    }
+
 
     /**
      * Given a Seat, returns the next seat
@@ -30,6 +42,5 @@ public class MovieTheatre {
 
         return new Seat(row, seat.seatNumber.next());
     }
-
 
 }
