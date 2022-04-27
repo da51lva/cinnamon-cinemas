@@ -1,4 +1,4 @@
-# Cinnamon Cinemas
+# Cinnamon Cinemas 🎥🍿
 
 This repository is an exercise from the [Tech Returners](https://www.techreturners.com) course.
 
@@ -6,7 +6,7 @@ This repository is an exercise from the [Tech Returners](https://www.techreturne
 
 You have a special task from Cinnamon Cinemas to develop a program to allocate seats to customers purchasing tickets for a movie theatre.
 
-The Cinnamon Cinemas Movie Theatre has 15 seats, arranged in 3 rows of 5.
+The Cinnamon Cinemas Movie Theatre has 15 seats 🪑, arranged in 3 rows of 5.
 - Rows are assigned a letter from A to C.
 - Seats are assigned a number from 1 to 5.
 
