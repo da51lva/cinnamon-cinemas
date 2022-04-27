@@ -17,4 +17,9 @@ public class Seat {
     public SeatNumber getSeatNumber() {
         return seatNumber;
     }
+
+    @Override
+    public String toString() {
+        return row.toString() + seatNumber.getStringRepresentation();
+    }
 }
